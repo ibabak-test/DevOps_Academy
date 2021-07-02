@@ -1,0 +1,47 @@
+user@devopsacademy:~/DevOpsAcademy$ history 100
+    1  sudo apt update
+    2  sudo apt install apt-transport-https ca-certificates curl software-properties-common
+    3  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    4  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+    5  sudo apt update
+    6  apt-cache policy docker-ce
+    7  sudo apt install docker-ce
+    8  sudo systemctl status docker
+    9  ls -la
+   10  mkdir DevOpsAcademy
+   11  cd DevOpsAcademy/
+   12  touch Dockerfile
+   13  touch index.html
+   14  vi Dockerfile 
+   15  vi index.html 
+   16  sudo docker build -t hello:v1 .
+   17  sudo docker run -d -p 80:80 hello:v1
+   18  history 100
+user@devopsacademy:~/DevOpsAcademy$ docker ps -a
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json?all=1: dial unix /var/run/docker.sock: connect: permission denied
+user@devopsacademy:~/DevOpsAcademy$ sudo docker ps -a
+CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS          PORTS                               NAMES
+868bf7651e84   hello:v1   "/docker-entrypoint.…"   58 seconds ago   Up 56 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp   admiring_beaver
+user@devopsacademy:~/DevOpsAcademy$ curl -v -XGET http://localhost
+Note: Unnecessary use of -X or --request, GET is already inferred.
+*   Trying 127.0.0.1:80...
+* Connected to localhost (127.0.0.1) port 80 (#0)
+> GET / HTTP/1.1
+> Host: localhost
+> User-Agent: curl/7.74.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Server: nginx/1.21.0
+< Date: Fri, 02 Jul 2021 18:46:26 GMT
+< Content-Type: text/html
+< Content-Length: 14
+< Last-Modified: Fri, 02 Jul 2021 18:42:49 GMT
+< Connection: keep-alive
+< ETag: "60df5e29-e"
+< Accept-Ranges: bytes
+< 
+Hello, World!
+* Connection #0 to host localhost left intact
+user@devopsacademy:~/DevOpsAcademy$ 
